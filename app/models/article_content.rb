@@ -6,6 +6,7 @@ class ArticleContent < ActiveRecord::Base
   def self.migrate_content
     Article.find_each do |article|
       next unless File.exist?("/www/crpa_ruby/current/txts/#{article.content}")
+      next if article.content.blank?
       next if article.article_content.present?
       content_tmp="";
       File.open("/www/crpa_ruby/current/txts/#{article.content}","r") do |file|
