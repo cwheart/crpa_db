@@ -11,7 +11,7 @@ class ArticleContent < ActiveRecord::Base
           content_tmp << line
         end
       end
-      ArticleContent.create(article_id: self.id, content: content_tmp)
+      ArticleContent.create(article_id: article.id, content: content_tmp)
     end
   end
 end
