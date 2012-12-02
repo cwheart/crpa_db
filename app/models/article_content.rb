@@ -1,10 +1,11 @@
 class ArticleContent < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :article_id, :content
+
   belongs_to :article
 
   def self.migrate_content
     Article.find_each do |article|
-      return unless File.File.exist?("/www/crpa_ruby/current/txts/#{article.content}")
+      return unless File.exist?("/www/crpa_ruby/current/txts/#{article.content}")
       content_tmp="";
       File.open("/www/crpa_ruby/current/txts/#{article.content}","r") do |file|
         while line = file.gets
@@ -17,10 +18,13 @@ class ArticleContent < ActiveRecord::Base
 
   def self.test_migrate_content(test_id)
     article = Article.find(test_id)
-    return unless File.File.exist?("/www/crpa_ruby/current/txts/#{article.content}")
+    p "/www/crpa_ruby/current/txts/#{article.content}"
+    return unless File.exist?("/www/crpa_ruby/current/txts/#{article.content}")
     content_tmp="";
     File.open("/www/crpa_ruby/current/txts/#{article.content}","r") do |file|
+      p '-----------------'
       while line = file.gets
+        p line
         content_tmp << line
       end
     end
