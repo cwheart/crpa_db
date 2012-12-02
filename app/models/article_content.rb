@@ -1,5 +1,6 @@
 class ArticleContent < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :article_id, :content
+
   belongs_to :article
 
   def self.migrate_content
@@ -21,6 +22,7 @@ class ArticleContent < ActiveRecord::Base
     content_tmp="";
     File.open("/www/crpa_ruby/current/txts/#{article.content}","r") do |file|
       while line = file.gets
+        p line
         content_tmp << line
       end
     end
