@@ -4,7 +4,7 @@ class ArticleContentOrg < ActiveRecord::Base
 
   def self.migrate_content
     ArticleOrg.find_each do |article|
-      next unless File.File.exist?("/www/crpa_ruby/current/txts/#{article.content}")
+      return unless File.File.exist?("/www/crpa_ruby/current/txts/#{article.content}")
       content_tmp="";
       File.open("/www/crpa_ruby/current/txts/#{article.content}","r") do |file|
         while line = file.gets
@@ -17,7 +17,7 @@ class ArticleContentOrg < ActiveRecord::Base
 
   def self.test_migrate_content(test_id)
     article = ArticleOrg.find(test_id)
-    next unless File.File.exist?("/www/crpa_ruby/current/txts/#{article.content}")
+    return unless File.File.exist?("/www/crpa_ruby/current/txts/#{article.content}")
     content_tmp="";
     File.open("/www/crpa_ruby/current/txts/#{article.content}","r") do |file|
       while line = file.gets
