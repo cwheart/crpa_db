@@ -4,8 +4,8 @@ class ArticleContentOrg < ActiveRecord::Base
 
   def self.migrate_content
     ArticleOrg.find_each do |article|
-      return unless File.exist?("/www/crpa_ruby/current/txts/#{article.content}")
-      return if article.article_content.present?
+      next unless File.exist?("/www/crpa_ruby/current/txts/#{article.content}")
+      next if article.article_content_org.present?
       content_tmp="";
       File.open("/www/crpa_ruby/current/txts/#{article.content}","r") do |file|
         while line = file.gets
