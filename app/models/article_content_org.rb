@@ -6,7 +6,7 @@ class ArticleContentOrg < ActiveRecord::Base
     ArticleOrg.find_each do |article|
       next unless File.exist?("/www/crpa_ruby/current/txts/#{article.content}")
       next if article.content.blank?
-      next if article.article_content_org.present?
+      # next if article.article_content_org.present?
       content_tmp="";
       File.open("/www/crpa_ruby/current/txts/#{article.content}","r") do |file|
         while line = file.gets
