@@ -7,10 +7,10 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: true
-  database: crpa
+  database: crpa_ruby
   pool: 5
   username: root
-  password: heartdb 
+  password: asdfqwer~
   host: localhost
 
 # Warning: The database defined as "test" will be erased and

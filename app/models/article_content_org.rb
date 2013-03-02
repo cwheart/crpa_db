@@ -1,19 +1,20 @@
 class ArticleContentOrg < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :content, :article_org_id
+
   belongs_to :article_org
 
   def self.migrate_content
-    ArticleOrg.find_each do |article|
+    ArticleOrg.where("id>47147").find_each do |article|
       next unless File.exist?("/www/crpa_ruby/current/txts/#{article.content}")
       next if article.content.blank?
-      # next if article.article_content_org.present?
+      next if article.article_content_org.present?
       content_tmp="";
       File.open("/www/crpa_ruby/current/txts/#{article.content}","r") do |file|
         while line = file.gets
           content_tmp << line
         end
       end
-      ArticleOrgContent.create(article_id: article.id, content: content_tmp)
+      ArticleContentOrg.create(article_org_id: article.id, content: content_tmp)
     end
   end
 
@@ -26,6 +27,6 @@ class ArticleContentOrg < ActiveRecord::Base
         content_tmp << line
       end
     end
-    ArticleOrgContent.create(article_id: article.id, content: content_tmp)
+    ArticleOrgContent.create(article_org_id: article.id, content: content_tmp)
   end
 end
